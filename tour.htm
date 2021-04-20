@@ -1,0 +1,406 @@
+<html>
+<head>
+<link rel=stylesheet href="styles.css" type="text/css">
+<script>
+var MSIE = /MSIE/.test(window.navigator.userAgent)
+var timerID
+var loop=7
+var maskon=false
+
+function init(){
+    r=document.location.search.substr(1)
+    document.getElementById("t1").innerHTML=document.getElementById(r+"-t1").innerHTML
+    document.getElementById("t2").innerHTML=document.getElementById(r+"-t2").innerHTML
+    e=document.getElementById("ss")
+    e.src="img/"+r+".jpg"
+    e.useMap="#"+r+"-m"
+    document.getElementById("mask").src="img/"+r+".gif"
+
+	if (!MSIE)
+		document.getElementById("ss").style.visibility="visible"
+	else {
+		ss.filters[0].Apply()
+		ss.style.visibility="visible"
+		ss.filters[0].Play()
+	}
+     timerID=window.setInterval(blinkMask,500)
+}
+function show(e,t,l,m11,m21){
+	document.getElementById("desc").innerHTML=document.getElementById(e).innerHTML
+
+	if (!MSIE) {
+		e=document.getElementById("fadeObj")
+		e.style.visibility=""
+		e.style.top=130
+		e.style.left=625
+		document.getElementById("arrow").style.display="none"
+		return
+	}
+
+	fadeObj.filters[0].Apply()
+	fadeObj.style.top=t
+	fadeObj.style.left=l
+
+	arrow.filters.item(0).M11=m11
+	arrow.filters.item(0).M21=m21
+
+	if (m21 > 0) {
+		fadeObj.style.height=Math.max(arrow.offsetHeight+20,bubble.offsetHeight)
+		heightDiff=bubble.offsetHeight-arrow.offsetHeight-20
+		if (heightDiff > 0) { // bubble is taller than arrow
+			arrow.style.top=heightDiff
+			bubble.style.top=0
+		} else {
+			arrow.style.top=0
+			bubble.style.top=-heightDiff
+		}
+	} else { // arrow pointing down
+		fadeObj.style.height=arrow.offsetHeight+bubble.offsetHeight-50
+		arrow.style.top=bubble.offsetHeight-40
+		bubble.style.top=0
+	}
+
+	if (m11 > 0) {
+		arrow.style.left=0
+		bubble.style.left=arrow.offsetWidth-3
+	} else { // arrow reversed, on the right
+	    bubble.style.left=0
+	    arrow.style.left=bubble.offsetWidth
+	}
+
+	fadeObj.style.width=arrow.offsetWidth+bubble.offsetWidth
+	fadeObj.style.visibility=""
+	fadeObj.filters[0].Play()
+}
+function hide(){
+	document.getElementById("fadeObj").style.visibility="hidden"
+}
+function blinkMask(m){
+	e=document.getElementById("mask")
+	if (loop-- <= 0) {
+		window.clearInterval(timerID)
+		if (!m) maskon=true
+	}
+	if (maskon) {
+		e.style.display="none"
+		maskon=false
+	} else {
+		e.style.display=""
+		maskon=true
+	}
+}
+</script>
+</head>
+
+<body class=bkg04 style='padding:10' onload=init() scroll=no>
+<div id=t1 class=det00 style='font-size:20pt'></div>
+<div id=t2 class=det00 style='font-size:12pt'></div>
+<img id=ss border=1 galleryimg=no style='visibility:hidden;margin-top:7;filter:progid:DXImageTransform.Microsoft.Fade(Duration=0.5)'>
+<div class=det00 onmouseover=blinkMask(1) onmouseout=blinkMask() style='cursor:default'>
+Move your mouse here to highlight the hot spots. Mouse over these areas to see additional details.</div>
+<img id=mask style='display:none;position:absolute;top:89;left:10;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=40)'>
+<div id=fadeObj style='position:absolute;visibility:hidden;filter:progid:DXImageTransform.Microsoft.RandomDissolve(Duration=0.25)'>
+<img id=arrow src=img/arrow.gif style='position:absolute;filter:progid:DXImageTransform.Microsoft.Matrix(SizingMethod="auto expand")'>
+<table id=bubble border=0 cellpadding=0 cellspacing=0 class=det00 style='position:relative;width:200'>
+<tr><td><img src=img/tl.gif></td><td class=tth></td><td><img src=img/tr.gif></td></tr>
+<tr><td class=tvl></td><td id=desc class=bkg03 style='padding:10'></td><td class=tvr></td></tr>
+<tr><td><img src=img/bl.gif></td><td class=tbh></td><td><img src=img/br.gif></td></tr>
+</table>
+</div>
+
+<div style='display:none'>
+<div id=acctinfo-t1>Account Information</div>
+<div id=acctinfo-t2>Brand new accounts start on this page, which is used to maintain global account<br>settings and create new tracking lists.</div>
+<div id=ai-menu>The navigation menu is used to move around the site. The current selection is indicated by a dark brown background and yellow text.</div>
+<div id=ai-tabs>Many pages on the site have tabs which are used to navigate to related pages. On the Account Information page, you can see the tab that allows you to create new bill tracking lists for your account.</div>
+<div id=ai-modified>Throughout the site, a form field with a green background indicates you have made changes but have not yet clicked the submit button. If you navigate to a new page without clicking submit, those changes will be canceled.</div>
+<div id=ai-persInfo>Your contact information is filled in when your account is created, but you can use this page to make changes as needed. It is especially important to keep your<br>e-mail address up-to-date, since this is where the system sends the reports you request.</div>
+<div id=ai-signon>Your sign-on name and password are shown here; you can change them at any time. Also note that your password is case-sensitive.</div>
+<div id=ai-entries>The delete buttons on the Account Information page effect ALL your tracking lists. This button will erase all the entries, or bills being tracked, in all your lists. This is normally used to "reset" your account just before the beginning of a new session.</div>
+<div id=ai-lists>The delete buttons on the Account Information page effect ALL your tracking lists. This button will erase all your tracking lists, along with their associated bill entries, keywords, report comments, and campaign contributions.</div>
+<div id=ai-contribs>The delete buttons on the Account Information page effect ALL your tracking lists. This button will erase all the campaign contributions in all your lists. This is normally used to "reset" your account just before the beginning of a new campaign season.</div>
+<div id=list-t1>Tracking List Maintenance</div>
+<div id=list-t2>From here you can add, modify, and delete bill tracking entries. For those with<br>wireless devices, this information can also be accessed using LegiTrak Mobile.</div>
+<div id=tl-sel>Click here to select or unselect all the bill checkboxes. Used together with the filter settings, this allows you to quickly and easily select a group of bills for modification.</div>
+<div id=tl-sorts>By default, the bills are sorted by priority and then bill number. You can click on the bill, priority, or position column headings to resort the list as desired.</div>
+<div id=tl-checks>To select multiple bills for editing, first put a checkmark next to their numbers and then click on the checkmark in the header row.</div>
+<div id=tl-bills>To edit a single bill tracking entry, click on the bill number. To add a new bill, click New.</div>
+<div id=tl-filters>To limit the list of bills being displayed, set one or both of these filters.</div>
+<div id=tl-links>These links will open a new browser window and load information from <b>www.leg.wa.gov</b>. There are links for the bill digest, the full text, and the "all documents" page.</div>
+<div id=tl-bill>Enter a 4-digit bill number here. You can add any bill number to your tracking list, even if it has not yet been added to the Daily Status.</div>
+<div id=tl-pri>Select one of 4 priorities: High, Medium, Low, and TBD. Custom weekly reports can be requested that are filtered to include just a single bill priority. For example, a TBD list can be generated for review by a client.</div>
+<div id=tl-dead>Click here to indicate a "dead" bill.</div>
+<div id=tl-pos>Select one of 6 positions: Support, Oppose, Concerns, Neutral, Monitor, or -Blank- (which doesn't print anything on reports).</div>
+<div id=tl-note>You can use this field to enter custom information suitable for sorting or grouping.</div>
+<div id=tl-comments>Enter comments of any length in this field. Comments can include HTML formatting tags, such as &lt;B&gt;<b>bold</b>&lt;/B&gt; and &lt;U&gt;<u>underline</u>&lt;/U&gt;. Any formatting used will be preserved on the printed reports.</div>
+<div id=tl-del>To delete a tracking entry, check this box.</div>
+<div id=listinfo-t1>Tracking List Information</div>
+<div id=listinfo-t2>This page allows you to make global changes to a bill tracking list. Lists can also be<br>shared among LegiTrak accounts in the same organization.</div>
+<div id=li-listowner>The tracking list's creator is shown here. This will always be you or someone in your organization.</div>
+<div id=li-listname>This is the long, or formal, name of the list. It is used in the title of list-specific reports.</div>
+<div id=li-shortname>This is a short nickname for your list, the way you typically refer to it. It is used throughout the web site to save space, for example on the menu tabs.</div>
+<div id=li-contact>If desired, you can enter contact information for your lists. This information is completely optional, and is for your reference only—it is not used by the system or printed on any reports.</div>
+<div id=li-delentries>This button will erase all the bill tracking entries in your list. This is normally used to "reset" the list just before the beginning of a new session.</div>
+<div id=li-dellist>This button will delete the entire list, along with its associated bill entries, keywords, report comments, and campaign contributions.</div>
+<div id=li-delcontrib>This button will erase all the campaign contributions associated with this list. This is normally used to "reset" your list just before the beginning of a new campaign season.</div>
+<div id=li-sharing>If you are the owner of this list (you created it) and you are part of an organization with multiple LegiTrak accounts, you can choose to share your list with the other members of your organization.</div>
+<div id=home-t1>Home Page</div>
+<div id=home-t2>Once you have created a tracking list and added some entries, you can view your<br>home page to see a quick snapshot of your account, including the latest bill activity.</div>
+<div id=ho-lists>When you create a tracking list, a shortcut that will take you to its bill tracking page is added to the menu.</div>
+<div id=ho-sizer>When the home page loads, the tracking lists section is set to a fixed width and the calendar section uses the rest of the width of your browser window. To change the width of the columns, you can drag this re-sizing bar back and forth.</div>
+<div id=ho-billpri>You can limit the list of bills displayed on your home page to a single bill priority. This will cause the page to load more quickly, especially if you have long lists.</div>
+<div id=ho-calview>Initially, the calendar view is set to summary mode, but full details are also available—including the committee hearing the bill and the full agenda. To help see all the details, you may want to adjust the re-sizing bar between the bill tracking and calendar sections.</div>
+<div id=ho-listhead>Clicking on the name of a tracking list will take you to the Tracking List page.</div>
+<div id=ho-bills>Clicking on a specific bill will take you directly to that tracking list and open that bill entry for editing. Bills are color-coded to show your position. A light gray background indicates a bill was marked active on the daily status.</div>
+<div id=ho-calbills>The list of calendar items is generated by searching all future meetings for agendas containing any of the bills in any of your tracking lists.</div>
+<div id=ho-calpri>If any of your tracking lists have a calendar bill set to High priority, a red exclamation mark will be shown. Similarly, if the highest priority is Low, a blue down-arrow will be displayed.</div>
+<div id=rptsum-t1>Summary/Account-Level Reports</div>
+<div id=rptsum-t2>The reports shown here either summarize information about all your tracking lists<br>or they provide general information applicable to your entire account.</div>
+<div id=rs-reqd>You can click on this link or on the Requested tab to see the reports you have requested for processing. Reports are generated every 10 minutes.</div>
+<div id=rs-switch>Use these links to switch between summary and detail report selections.</div>
+<div id=rs-daily>The daily report is generated and e-mailed to you automatically each weekday at 3 AM. It combines data from the Daily Status, the Daily Digest, and the Daily Calendar as provided by <b>www.leg.wa.gov</b>. This report is fully customizable and contains bills pertaining to your tracking lists and their keywords.</div>
+<div id=rs-cal>This report is generated by searching all future meetings for agendas containing any of the bills from all your tracking lists. It is formatted for importing directly into Microsoft Outlook.</div>
+<div id=rs-cal-all>This report contains all the meetings that have been published in the daily and weekly legislative calendars. It is formatted for importing directly into Microsoft Outlook.</div>
+<div id=rs-legs>This report contains extensive information for all 147 state legislators, including e-mail address, phone number, and committee memberships. It is formatted for importing directly into Microsoft Outlook.</div>
+<div id=rs-cands>This report contains contact information for all candidates (statewide and legislative) and PACs. It is formatted for importing directly into Microsoft Outlook.</div>
+<div id=rs-events>This report contains information about upcoming campaign events and fundraisers. During non-session months, this information is also shown on the home page (in lieu of committee meetings). It is formatted for importing directly into Microsoft Outlook.</div>
+<div id=rs-contribs>This report shows contribution activity for all candidates. It can be customized to include recommended amounts, actual contributions, or both. You can also select which of your tracking lists should appear on the report.</div>
+<div id=rs-boxes>Select one or more reports using these checkboxes and then click the Submit button to request them. All reports are e-mailed to the address shown on the Account Information page.</div>
+<div id=rptdet-t1>Detail/List-Level Reports</div>
+<div id=rptdet-t2>These reports contain information pertaining to an individual tracking list.<br>If you would like to see sample reports, click on the link to the left.</div>
+<div id=rd-reqd>You can click on this link or on the Requested tab to see the reports you have requested for processing. Reports are generated every 10 minutes. </div>
+<div id=rd-switch>Use these links to switch between summary and detail report selections.</div>
+<div id=rd-weekly>The weekly report contains detailed information about a given tracking list. This report is fully customizable, with the defaults showing a summarized list of all bills, calendar activity, and a copy of each bill's digest text. You can also limit the report to a single priority.</div>
+<div id=rd-bills-cur>Each daily report contains a section showing which bills from the current daily digest match your tracking lists' optional keywords. This report contains the same information but searches all available digests for the session.</div>
+<div id=rd-bills-all>Similar to the previous report, this report searches all available digests over the 2-year biennium for bills containing your tracking lists' keywords.</div>
+<div id=rd-reg-cur>This report uses your tracking lists' keywords to search the current issue of the Washington State Register. You can configure this report to be automatically e-mailed to you when a new issue of the Register is published.</div>
+<div id=rd-reg-all>This report uses your tracking lists' keywords to search the past four issues of the Washington State Register.</div>
+<div id=rd-rollcall>This post-session report generates a vote record analysis for the specific bills in your tracking lists. It is similar in style to the vote records published by the AWB and the WSLC.</div>
+<div id=rd-elanal>This report produces a one-page summary for each districts' elections (49 pages total). It shows AWB and WSLC vote records for each incumbent as well as historical Democrat vs. Republican vote percentages for each of the three elections per district.</div>
+<div id=rd-contrib-nz>This report lists each candidate having a non-zero recommendation or actual contribution for the selected tracking list. It includes the candidate's campaign name and address, as well as any comments you entered on the Campaign page.</div>
+<div id=rd-contrib-all>Similar to the previous report, this report includes all candidates regardless of contribution amounts.</div>
+<div id=rd-contrib-sum>This report shows MTD and All Dates contribution totals, one line per candidate.</div>
+<div id=rd-boxes>Select one or more reports using these checkboxes and then click the Submit button to request them. All reports are e-mailed to the address shown on the Account Information page.</div>
+<div id=rptcust-t1>Customize Your Reports</div>
+<div id=rptcust-t2>You can customize your daily and weekly reports, choosing<br>which sections to include on the report and in what order.</div>
+<div id=rc-reports>Select which report you would like to customize.</div>
+<div id=rc-active>For the selected report, choose either the default layout or one of your two custom layouts.</div>
+<div id=rc-auto>By default, the daily report is e-mailed to you automatically each morning at 3 AM. You can also have weekly reports sent to you every Friday morning.</div>
+<div id=rc-format>Reports can be formatted as Microsoft Word documents, Microsoft Excel documents, HTML documents sent as attachments, or as HTML<br>e-mail messages.</div>
+<div id=rc-styles>The default report style uses the Book Antiqua font with blue title highlights. You can also choose a style that uses the sans serif Arial font.</div>
+<div id=rc-applyall>When customizing a weekly report, you can check this box to copy your settings to all your tracking lists.</div>
+<div id=rc-preview>The preview pane lets you see the results of your customizations as you make them.</div>
+<div id=rc-gtitle>This title is displayed on the weekly report of all your tracking lists.</div>
+<div id=rc-gcomm>These comments are displayed on the weekly reports of all your tracking lists.</div>
+<div id=rc-ltitle>This title is specific to the currently selected tracking list.</div>
+<div id=rc-lcomm>These comments are specific to the currently selected tracking list.</div>
+<div id=rc-sections>You can decided which informational sections, and in which order, should appear on your daily and weekly reports.</div>
+<div id=rc-pri>For the weekly reports, you can limit the output to bills with a specific priority.</div>
+<div id=quickadd-t1>Quick Add</div>
+<div id=quickadd-t2>This page is used to quickly add a bill to several tracking lists at once.<br>The Browse and Search pages also link to this page.</div>
+<div id=qa-bill>Enter the bill number you would like to add here.</div>
+<div id=qa-comments>These comments will be added to all the selected tracking lists.</div>
+<div id=qa-sel>Use these checkboxes to select the tracking lists to which this bill will be added.</div>
+<div id=qa-notes>You can enter a unique note for each tracking list here.</div>
+<div id=qa-pri>Select a priority level for this bill for each tracking list.</div>
+<div id=qa-pos>Select a position for this bill for each tracking list.</div>
+<div id=browse-t1>Browse Bills</div>
+<div id=browse-t2>This page allows you to browse through the bill titles by selecting a range of<br>bill numbers or daily digests.</div>
+<div id=br-bill>By entering a range of bill numbers, you can quickly and easily scan the bill titles for those bills which might be appropriate to include in your tracking lists.</div>
+<div id=br-digest>By entering a range of digests, you can quickly and easily scan the bill titles for those bills which might be appropriate to include in your tracking lists.</div>
+<div id=br-sponsor>Selecting a prime sponsor will limit the list of bills to those which were introduced by the selected legislator.</div>
+<div id=br-loc>Filtering by location will limit the list of bills to those which are in specific committees or other locations as specified in the daily status.</div>
+<div id=br-level>You can also filter by location level, which are the main milestones of a bill's progress: 1st Reading, Issue Committee, Rules, 2nd Reading, etc.</div>
+<div id=br-bills>Clicking on a bill number link will take you to the Quick Add page, which will allow you to add the bill to your tracking lists. Once you've added the bill (or canceled), you'll be returned to the Browse page.</div>
+<div id=br-links>These links will open a new browser window and load information from <b>www.leg.wa.gov</b>. There are links for the bill digest, the full text, and the "all documents" page.</div>
+<div id=search-t1>Search for Bills</div>
+<div id=search-t2>Use this page to search the bill digests for keywords associated with your tracking<br>lists. You can also use an ad hoc query or combine both methods.</div>
+<div id=se-keywords>Select a tracking list's keywords to use for searching the digest texts. After selecting a list, you can click the edit button to modify the keywords and their importance.</div>
+<div id=se-logop>You can combine a keyword search with an ad hoc query using one of the following logical operators: OR, AND, or AND NOT.</div>
+<div id=se-search>Enter an ad hoc query here. Click on the Help button for details on query syntax.</div>
+<div id=se-edition>You can search digests from the first half of the biennium, the second half, or both.</div>
+<div id=se-digest>You can search all the digests or limit your search to the current day's.</div>
+<div id=se-fields>You can search the digests' bill titles, the text, or both.</div>
+<div id=se-bills>Clicking on a bill number link will take you to the Quick Add page, which will allow you to add the bill to your tracking lists. Once you've added the bill (or canceled), you'll be returned to the Search page.</div>
+<div id=se-links>These links will open a new browser window and load information from <b>www.leg.wa.gov</b>. There are links for the bill digest, the full text, and the "all documents" page.</div>
+<div id=vcard-t1>Vote Card Maintenance</div>
+<div id=vcard-t2>LegiTrak provides an online version of the vote card. Quickly see the progress of your<br>bill and how each legislator is planning to vote.</div>
+<div id=vc-summary>Summary statistics are shown at the top of the vote card page, including who owns the card and when the last update was made.</div>
+<div id=vc-filters>You can limit the list of legislators to be displayed based on their party, committee membership, or both.</div>
+<div id=vc-legs>For each legislator, you can indicate a vote response of Yes, Leaning Yes, Undecided, Leaning No, No, or No Response.</div>
+<div id=vc-updated>For each response, you can see who entered it into LegiTrak and when.</div>
+<div id=vcardcreate-t1>Create/Share/Delete Vote Cards</div>
+<div id=vcardcreate-t2>LegiTrak's online vote cards are a powerful time-saving tool, especially when shared<br>with other LegiTrak users and accessed wirelessly via the LegiTrak Mobile site.</div>
+<div id=vc-title>Provide a short description of your vote card that will be meaningful to everyone who will be sharing it.</div>
+<div id=vc-chamber>Specify which legislative chamber this vote card will track.</div>
+<div id=vc-del>Once you've finished with a vote card, you can use this checkbox to delete it.</div>
+<div id=vc-share>One of the most powerful community features of LegiTrak is the ability to work with other users to track vote responses.</div>
+<div id=campaign-t1>Campaign Tracking/Contribution Maintenance</div>
+<div id=campaign-t2>This page allow you to track candidates and contribution activity.<br>LegiTrak contains information on both legislative and statewide candidates.</div>
+<div id=ca-elyear>By default candidates for all future elections are displayed, but you can choose to limit the list to a single year—and even view candidates for the elections up to 2 years past.</div>
+<div id=ca-races>Use this filter to see a group of candidates related by statewide race, district race, or committee membership.</div>
+<div id=ca-status>Use this filter to limit the list of candidates to incumbents, just senators, just representatives, or challengers.</div>
+<div id=ca-party>You can limit the list of candidates to Democrats, Republicans, or third-parties.</div>
+<div id=ca-sel>Click on the Sel heading to quickly select (or unselect) all the candidates on the page.</div>
+<div id=ca-sorts>Click on the column headings to sort the list of candidates by name, group, or contribution amounts.</div>
+<div id=ca-check>To select multiple candidates for editing, first put a checkmark next to their names and then click on the checkmark in the header row.</div>
+<div id=ca-plus>To see the full details for a candidate, click on the plus next to their name. Clicking on the plus in the header row will expand the details for all the candidates on the page.</div>
+<div id=ca-filters>These filters will limit the list of candidates based on the information in each column.</div>
+<div id=ca-names>To edit the contributions and comments for a candidate, click on their name.</div>
+<div id=ca-comments>Enter comments of any length in this field. Comments can include HTML formatting tags, such as &lt;B&gt;<b>bold</b>&lt;/B&gt; and &lt;U&gt;<u>underline</u>&lt;/U&gt;. Any formatting used will be preserved on the printed reports.</div>
+<div id=ca-district>Clicking on the district link will reload the page showing all the races for that district.</div>
+<div id=ca-comms>For incumbents, committee memberships are listed here. To reload the page showing all the members for a committee, click on the committee name.</div>
+<div id=ca-recs>Enter your recommended contribution amounts here.</div>
+<div id=ca-actuals>Enter actual contribution dates and amounts here. Up to 3 contributions for the primary and general elections can be entered.</div>
+<div id=ca-groups>You can "group" candidates together for various tracking and reporting purposes. For example, you may have multiple tiers of campaign funding available. Use this field to indicate which candidates are in which tiers.</div>
+<div id=ca-applyall>You may wish to copy your general comments about the candidates to all your tracking lists.</div>
+</div>
+
+<map name=acctinfo-m>
+<area shape=rect coords='0,32,71,142' onmouseover=show('ai-menu',173,80,4,1.5) onmouseout=hide()>
+<area shape=rect coords='82,46,257,61' onmouseover=show('ai-tabs',113,251,4,2) onmouseout=hide()>
+<area shape=rect coords='204,67,408,112' onmouseover=show('ai-persInfo',95,420,1,1) onmouseout=hide()>
+<area shape=rect coords='204,114,408,125' onmouseover=show('ai-modified',110,420,1,1) onmouseout=hide()>
+<area shape=rect coords='204,153,408,196' onmouseover=show('ai-signon',222,420,1,1) onmouseout=hide()>
+<area shape=rect coords='270,209,389,221' onmouseover=show('ai-entries',219,402,1.5,1) onmouseout=hide()>
+<area shape=rect coords='270,223,389,235' onmouseover=show('ai-lists',247,380,2,1) onmouseout=hide()>
+<area shape=rect coords='270,246,385,259' onmouseover=show('ai-contribs',265,400,1.5,1) onmouseout=hide()>
+</map>
+<map name=list-m>
+<area shape=rect coords="87,63,100,73" onmouseover=show('tl-sel',120,113,4,1.5) onmouseout=hide()>
+<area shape=rect coords="102,63,220,73" onmouseover=show('tl-sorts',114,231,2,1) onmouseout=hide()>
+<area shape=rect coords="87,76,100,174" onmouseover=show('tl-checks',196,111,4,1.5) onmouseout=hide()>
+<area shape=rect coords="102,76,120,174" onmouseover=show('tl-bills',206,132,4,1.5) onmouseout=hide()>
+<area shape=rect coords="122,76,220,88" onmouseover=show('tl-filters',171,231,2,1) onmouseout=hide()>
+<area shape=rect coords="600,90,627,172" onmouseover=show('tl-links',200,252,-4,1.5) onmouseout=hide()>
+<area shape=rect coords="107,245,199,257" onmouseover=show('tl-bill',195,210,2,-2) onmouseout=hide()>
+<area shape=rect coords="107,258,216,271" onmouseover=show('tl-pri',152,227,2,-2) onmouseout=hide()>
+<area shape=rect coords="224,258,261,271" onmouseover=show('tl-dead',240,253,2,-2) onmouseout=hide()>
+<area shape=rect coords="107,271,216,284" onmouseover=show('tl-pos',221,227,2,-2) onmouseout=hide()>
+<area shape=rect coords="107,284,247,298" onmouseover=show('tl-note',249,257,2,-2) onmouseout=hide()>
+<area shape=rect coords="107,298,601,330" onmouseover=show('tl-comments',192,365,2,-2) onmouseout=hide()>
+<area shape=rect coords="209,342,346,354" onmouseover=show('tl-del',324,235,2,-2) onmouseout=hide()>
+</map>
+<map name=listinfo-m>
+<area shape=rect coords="205,69,271,78" onmouseover=show('li-listowner',147,285,2,1) onmouseout=hide()>
+<area shape=rect coords="205,81,408,93" onmouseover=show('li-listname',160,420,1,1) onmouseout=hide()>
+<area shape=rect coords="205,96,408,108" onmouseover=show('li-shortname',146,420,1,1) onmouseout=hide()>
+<area shape=rect coords="205,111,408,183" onmouseover=show('li-contact',146,420,1,1) onmouseout=hide()>
+<area shape=rect coords="282,196,403,208" onmouseover=show('li-delentries',248,417,1,1) onmouseout=hide()>
+<area shape=rect coords="282,210,388,221" onmouseover=show('li-dellist',276,400,1,1) onmouseout=hide()>
+<area shape=rect coords="282,233,443,245" onmouseover=show('li-delcontrib',279,400,1,1) onmouseout=hide()>
+<area shape=rect coords="205,257,277,287" onmouseover=show('li-sharing',281,290,2,1) onmouseout=hide()>
+</map>
+<map name=home-m>
+<area shape=rect coords="0,145,72,174" onmouseover=show('ho-lists',226,78,3,1) onmouseout=hide()>
+<area shape=rect coords="308,47,326,78" onmouseover=show('ho-sizer',122,341,3,2) onmouseout=hide()>
+<area shape=rect coords="114,49,290,74" onmouseover=show('ho-billpri',166,219,3,2) onmouseout=hide()>
+<area shape=rect coords="379,49,464,74" onmouseover=show('ho-calview',148,122,-2,3) onmouseout=hide()>
+<area shape=rect coords="87,89,134,98" onmouseover=show('ho-listhead',184,147,3,2) onmouseout=hide()>
+<area shape=rect coords="87,99,306,169" onmouseover=show('ho-bills',188,315,3,2) onmouseout=hide()>
+<area shape=rect coords="316,97,337,224" onmouseover=show('ho-calbills',240,347,3,2) onmouseout=hide()>
+<area shape=rect coords="339,97,346,224" onmouseover=show('ho-calpri',186,355,2,2) onmouseout=hide()>
+</map>
+<map name=rptsum-m>
+<area shape=rect coords="96,73,184,84" onmouseover=show('rs-reqd',145,195,2,1.5) onmouseout=hide()>
+<area shape=rect coords="96,92,172,111" onmouseover=show('rs-switch',172,183,2,0.5) onmouseout=hide()>
+<area shape=rect coords="203,74,247,83" onmouseover=show('rs-daily',77,259,4,2) onmouseout=hide()>
+<area shape=rect coords="216,83,309,90" onmouseover=show('rs-cal',157,322,2,2) onmouseout=hide()>
+<area shape=rect coords="229,92,359,99" onmouseover=show('rs-cal-all',167,371,2,2) onmouseout=hide()>
+<area shape=rect coords="241,101,339,108" onmouseover=show('rs-legs',147,352,2,2) onmouseout=hide()>
+<area shape=rect coords="254,109,354,117" onmouseover=show('rs-cands',179,367,2,1.5) onmouseout=hide()>
+<area shape=rect coords="265,119,367,125" onmouseover=show('rs-events',137,379,2,2) onmouseout=hide()>
+<area shape=rect coords="278,127,351,135" onmouseover=show('rs-contribs',175,363,2,2) onmouseout=hide()>
+<area shape=rect coords="203,148,292,160" onmouseover=show('rs-boxes',206,304,2,1.5) onmouseout=hide()>
+</map>
+<map name=rptdet-m>
+<area shape=rect coords="96,73,184,84" onmouseover=show('rd-reqd',145,195,2,1.5) onmouseout=hide()>
+<area shape=rect coords="96,92,172,111" onmouseover=show('rd-switch',172,179,2,0.5) onmouseout=hide()>
+<area shape=rect coords="203,73,257,82" onmouseover=show('rd-weekly',106,268,4,2) onmouseout=hide()>
+<area shape=rect coords="215,82,376,90" onmouseover=show('rd-bills-cur',109,389,1.5,1.5) onmouseout=hide()>
+<area shape=rect coords="228,91,352,100" onmouseover=show('rd-bills-all',161,364,2,1.5) onmouseout=hide()>
+<area shape=rect coords="240,101,391,108" onmouseover=show('rd-reg-cur',107,404,1,1) onmouseout=hide()>
+<area shape=rect coords="254,109,390,117" onmouseover=show('rd-reg-all',172,403,1,1) onmouseout=hide()>
+<area shape=rect coords="266,118,319,125" onmouseover=show('rd-rollcall',173,333,2,1.5) onmouseout=hide()>
+<area shape=rect coords="278,126,373,134" onmouseover=show('rd-elanal',140,384,1.5,1.5) onmouseout=hide()>
+<area shape=rect coords="291,135,448,143" onmouseover=show('rd-contrib-nz',181,20,-2,2) onmouseout=hide()>
+<area shape=rect coords="304,144,428,152" onmouseover=show('rd-contrib-all',221,31,-2,1) onmouseout=hide()>
+<area shape=rect coords="316,153,444,161" onmouseover=show('rd-contrib-sum',242,44,-2,1) onmouseout=hide()>
+<area shape=rect coords="204,161,329,187" onmouseover=show('rd-boxes',207,346,2,1) onmouseout=hide()>
+</map>
+<map name=rptcust-m>
+<area shape=rect coords="216,66,404,79" onmouseover=show('rc-reports',166,417,1,1) onmouseout=hide()>
+<area shape=rect coords="216,80,385,91" onmouseover=show('rc-active',161,399,1,1) onmouseout=hide()>
+<area shape=rect coords="216,92,278,104" onmouseover=show('rc-auto',165,290,3,1.5) onmouseout=hide()>
+<area shape=rect coords="216,109,342,121" onmouseover=show('rc-format',163,357,2,1) onmouseout=hide()>
+<area shape=rect coords="216,122,342,135" onmouseover=show('rc-styles',189,357,2,1) onmouseout=hide()>
+<area shape=rect coords="276,148,376,159" onmouseover=show('rc-applyall',228,390,1,1) onmouseout=hide()>
+<area shape=rect coords="94,168,259,366" onmouseover=show('rc-preview',196,273,3,-1) onmouseout=hide()>
+<area shape=rect coords="267,177,618,189" onmouseover=show('rc-gtitle',148,378,2,-2) onmouseout=hide()>
+<area shape=rect coords="267,192,618,232" onmouseover=show('rc-gcomm',149,378,2,-2) onmouseout=hide()>
+<area shape=rect coords="267,244,618,255" onmouseover=show('rc-ltitle',215,378,2,-2) onmouseout=hide()>
+<area shape=rect coords="267,258,618,299" onmouseover=show('rc-lcomm',229,378,2,-2) onmouseout=hide()>
+<area shape=rect coords="336,309,481,349" onmouseover=show('rc-sections',246,388,1,-2) onmouseout=hide()>
+<area shape=rect coords="336,359,380,371" onmouseover=show('rc-pri',323,388,1,-2) onmouseout=hide()>
+</map>
+<map name=quickadd-m>
+<area shape=rect coords="157,64,194,78" onmouseover=show('qa-bill',163,207,2,2) onmouseout=hide()>
+<area shape=rect coords="157,81,623,121" onmouseover=show('qa-comments',208,291,2,2) onmouseout=hide()>
+<area shape=rect coords="97,138,118,171" onmouseover=show('qa-sel',241,130,2,2) onmouseout=hide()>
+<area shape=rect coords="233,138,318,169" onmouseover=show('qa-notes',241,330,2,2) onmouseout=hide()>
+<area shape=rect coords="414,138,460,169" onmouseover=show('qa-pri',241,144,-2,2) onmouseout=hide()>
+<area shape=rect coords="514,138,565,168" onmouseover=show('qa-pos',241,244,-2,2) onmouseout=hide()>
+</map>
+<map name=browse-m>
+<area shape=rect coords="86,62,191,89" onmouseover=show('br-bill',169,203,1.5,2) onmouseout=hide()>
+<area shape=rect coords="198,62,301,89" onmouseover=show('br-digest',169,310,1.5,2) onmouseout=hide()>
+<area shape=rect coords="304,62,391,89" onmouseover=show('br-sponsor',176,400,1.5,2) onmouseout=hide()>
+<area shape=rect coords="395,62,491,89" onmouseover=show('br-loc',169,147,-1.5,2) onmouseout=hide()>
+<area shape=rect coords="495,62,626,89" onmouseover=show('br-level',169,248,-1.5,2) onmouseout=hide()>
+<area shape=rect coords="85,108,113,372" onmouseover=show('br-bills',250,127,4,1.5) onmouseout=hide()>
+<area shape=rect coords="597,108,627,372" onmouseover=show('br-links',258,251,-4,1.5) onmouseout=hide()>
+</map>
+<map name=search-m>
+<area shape=rect coords="85,62,157,100" onmouseover=show('se-keywords',156,168,3,2) onmouseout=hide()>
+<area shape=rect coords="160,62,238,100" onmouseover=show('se-logop',175,251,3,2) onmouseout=hide()>
+<area shape=rect coords="241,62,627,100" onmouseover=show('se-search',185,370,2,2) onmouseout=hide()>
+<area shape=rect coords="85,102,157,116" onmouseover=show('se-edition',185,170,3,1) onmouseout=hide()>
+<area shape=rect coords="160,102,238,116" onmouseover=show('se-digest',197,251,3,1) onmouseout=hide()>
+<area shape=rect coords="241,102,357,116" onmouseover=show('se-fields',202,366,2,1) onmouseout=hide()>
+<area shape=rect coords="85,135,115,316" onmouseover=show('se-bills',254,131,4,1.5) onmouseout=hide()>
+<area shape=rect coords="598,133,627,317" onmouseover=show('se-links',233,258,-4,1.5) onmouseout=hide()>
+</map>
+<map name=vcard-m>
+<area shape=rect coords="86,50,627,91" onmouseover=show('vc-summary',179,206,3,3) onmouseout=hide()>
+<area shape=rect coords="231,118,483,134" onmouseover=show('vc-filters',196,354,2,1) onmouseout=hide()>
+<area shape=rect coords="86,150,212,375" onmouseover=show('vc-legs',223,230,2,1) onmouseout=hide()>
+<area shape=rect coords="238,151,350,243" onmouseover=show('vc-updated',247,368,2,1) onmouseout=hide()>
+</map>
+<map name=vcardcreate-m>
+<area shape=rect coords="169,55,290,68" onmouseover=show('vc-title',138,304,3,1) onmouseout=hide()>
+<area shape=rect coords="169,69,210,82" onmouseover=show('vc-chamber',165,222,3,1) onmouseout=hide()>
+<area shape=rect coords="168,84,178,93" onmouseover=show('vc-del',158,193,3,0.5) onmouseout=hide()>
+<area shape=rect coords="88,117,532,354" onmouseover=show('vc-share',94,285,1.5,-1.5) onmouseout=hide()>
+</map>
+<map name=campaign-m>
+<area shape=rect coords="87,64,165,90" onmouseover=show('ca-elyear',176,174,3,2.5) onmouseout=hide()>
+<area shape=rect coords="166,64,435,90" onmouseover=show('ca-races',177,276,2,1.5) onmouseout=hide()>
+<area shape=rect coords="438,64,542,90" onmouseover=show('ca-status',182,186,-3,2.5) onmouseout=hide()>
+<area shape=rect coords="543,64,625,90" onmouseover=show('ca-party',182,256,-3,2) onmouseout=hide()>
+<area shape=rect coords="87,92,100,103" onmouseover=show('ca-sel',188,111,3,2) onmouseout=hide()>
+<area shape=rect coords="102,92,326,103" onmouseover=show('ca-sorts',189,206,2.5,1.5) onmouseout=hide()>
+<area shape=rect coords="87,105,100,163" onmouseover=show('ca-check',186,110,2,1) onmouseout=hide()>
+<area shape=rect coords="102,105,110,163" onmouseover=show('ca-plus',170,121,3,1) onmouseout=hide()>
+<area shape=rect coords="111,105,326,118" onmouseover=show('ca-filters',206,192,2,2) onmouseout=hide()>
+<area shape=rect coords="111,119,215,163" onmouseover=show('ca-names',216,196,2,1) onmouseout=hide()>
+<area shape=rect coords="329,119,627,225" onmouseover=show('ca-comments',170,88,-1.5,1) onmouseout=hide()>
+<area shape=rect coords="102,165,143,174" onmouseover=show('ca-district',257,154,2,1) onmouseout=hide()>
+<area shape=rect coords="102,175,266,183" onmouseover=show('ca-comms',226,283,2,1) onmouseout=hide()>
+<area shape=rect coords="95,275,273,289" onmouseover=show('ca-recs',256,220,3,-2) onmouseout=hide()>
+<area shape=rect coords="95,300,294,342" onmouseover=show('ca-actuals',241,226,3,-2) onmouseout=hide()>
+<area shape=rect coords="553,261,614,274" onmouseover=show('ca-groups',167,286,-2,-2) onmouseout=hide()>
+<area shape=rect coords="277,354,433,367" onmouseover=show('ca-applyall',266,310,3,-3) onmouseout=hide()>
+</map>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<html>
+<head>
+<link rel=stylesheet href="styles.css" type="text/css">
+<script>
+function init(){
+	r=document.location.search.substr(1)
+	document.getElementById("desc").innerHTML=document.getElementById(r).innerHTML
+	e=document.getElementById("rpt")
+	e.src="img/r-"+r+".jpg"
+	if (/MSIE/.test(window.navigator.userAgent)) {
+		e.filters[0].Apply()
+		e.style.visibility="visible"
+		e.filters[0].Play()
+	} else
+		e.style.visibility="visible"
+	}
+</script>
+</head>
+
+<body class=bkg04 style='padding:7 15' onload=init() scroll=no>
+<table border=0 cellpadding=0 cellspacing=0><tr>
+<td id=desc class=det00 style='padding-right:15' valign=top width=300></td>
+<td><img id=rpt border=1 galleryimg=no
+ style='visibility:hidden;filter:progid:DXImageTransform.Microsoft.Fade(Duration=0.5)'></td>
+</tr></table>
+
+<div style='display:none'>
+<div id=daily><font size=5>Daily Report</font><br><br>
+The daily report is automatically generated each workday morning at 3 AM. It combines data from the daily status, calendar, and digest
+as posted on www.leg.wa.gov. The collected data is then correlated against the data in your
+tracking lists to produce an informative summary report.<br><br>
+The report is presented in four sections: Calendar Items, Bills with Activity, Possible Bills of Interest, and Bill Details. The layout
+is customizable, allowing you to choose which sections appear and in what order.<br><br>
+The Calendar Items section shows which bills from your tracking lists are scheduled to be discussed in upcoming committee meetings, based on the
+meeting agenda.<br><br>
+The Bills with Activity section shows which bills were active the previous day, based on a flag in the daily status.<br><br>
+The Bills of Interest section uses keywords you can associate with your tracking lists to search the daily digest for potentially interesting bills.<br><br>
+The Bill Details section shows the digests of the bills matching your keywords. A link to the full text of the bill is also provided.
+</div>
+<div id=daily-ex><font size=5>Daily Report (Excel)</font><br><br>
+The Microsoft Excel version of the daily report provides a concise summary of your tracking lists. This report combines data from the daily status
+and the daily digests and correlates that against the data in your tracking lists. Unlike the regular daily report, this report includes all the
+bills from all your tracking lists—not just those which have current activity.<br><br>
+This report is available in two configurations: grouped by tracking list or in a strict columnar layout. The latter is especially useful for
+obtaining a unified view of your entire account and can be quickly and easily sorted on any of the columns.
+</div>
+<div id=weekly><font size=5>Weekly Report</font><br><br>
+The weekly report can be automatically generated for you each week or can be requested on demand. The report is intended for delivery to someone
+not directly involved in daily activities, e.g., a client or director.<br><br>
+The report is presented in sections: Comments, Bill Tracking Summary, Calendar Items, and Bill Details. The layout
+is customizable, allowing you to choose which sections appear and in what order. By default, all the bills for a given tracking list
+appear on this report, but you can choose to limit the report to a single priority.<br><br>
+The Comments section allows you to provide remarks concerning the week’s events. There are two types, general (shared) and list-specific comments.<br><br>
+The Bill Tracking Summary section shows the list of bills being tracked for this list, grouped by priority. The Bill Details section shows the
+digest for each of these bills.<br><br>
+The Calendar Items section shows which bills for this tracking list are scheduled to be discussed in upcoming committee meetings, based on the
+meeting agenda.
+</div>
+<div id=weekly-ex><font size=5>Weekly Report (Excel)</font><br><br>
+The Microsoft Excel version of the weekly report provides a concise summary of a single tracking list. This report combines data from the
+daily status and the daily digests and correlates that against the data in a tracking list.
+</div>
+<div id=rollcall><font size=5>Roll Call Analysis</font><br><br>
+The roll call analysis report is a post-session review of how each of the legislators voted on the bills in a given tracking list. It is analogous
+to the vote records created by AWB and the WSLC, except it is specific to your bills.<br><br>
+The Score column shows the number of times a given legislator voted Yea on a bill marked Support or Nay on a bill marked Oppose. The Percentage
+column is calculated by dividing the score by the total number of votes taken where your list shows either Support or Oppose. Bills marked with
+other positions (Concerns, Neutral, Monitor, or blank) are not counted. Also, absent or excused votes are not counted.<br><br>
+After the report has been generated, you can change your position for each vote column on the spreadsheet, and the scores and percentages will be
+re-calculated “on-the-fly.”
+</div>
+<div id=dist-el><font size=5>District Elections Report</font><br><br>
+The district elections report summarizes the three races for each district onto a single page. Each race is presented in two parts: details about
+the incumbent and a listing of the challengers.<br><br>
+For each incumbent, the report shows their AWB/WSLC vote records, committee memberships, leadership positions, and any comments you have entered
+about them.<br><br>
+In the challengers section, the report shows a Democrat/Republican vote history for the race, the names and campaign names of the candidates,
+their phone numbers, and any comments you have entered about them.
+</div>
+<div id=contribs><font size=5>Contribution Report</font><br><br>
+The contribution report is specific to an individual tracking list and shows recommended contributions, actual contributions, and the difference
+between them for each candidate. It also provides detailed contact information, including mailing address, phone number, and e-mail address.<br><br>
+There are two versions of this report, one that includes all candidates and a second that includes only those candidates with non-zero
+contribution amounts (either recommended or actual).<br><br>
+Candidates can be placed into groups which will generate separate subtotals in addition to the grand totals printed at the end of the report.
+</div>
+<div id=matrix><font size=5>Contribution Analysis</font><br><br>
+The contribution analysis report provides a consolidated view of the contribution activity for your entire account. This report can be customized
+to include only those tracking lists which are actively participating in campaign financing. You can also choose which contribution type to report:
+recommendations, actual amounts, or both. When both types are selected, they are shown on separate sheets with a third sheet showing the difference.<br><br>
+Contributions for both the primary and general elections are shown, and totals are calculated for each candidate across all tracking lists included
+in the report. Subtotals are calculated for House/Senate Democrats/Republicans for district races, and Democrats/Republicans for statewide races.<br><br>
+After the primaries, the percentage of votes received by each candidate is included along with an indicator showing whether or not they passed
+the primary.
+</div>
+</div>
+
+</body>
+</html>

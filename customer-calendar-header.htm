@@ -1,0 +1,22 @@
+<html>
+<head>
+<link rel=stylesheet href="styles.css" type="text/css">
+<script src="js/bts.js"></script>
+<script>
+function go(c){
+	s=(getCookie("SessionStatus")!=3)? "calendar-items.asp" : "calendar-events.asp"
+	h=(c==0)? "customer-calendar.asp" : s
+	parent.calendar.location.href=h
+}
+</script>
+</head>
+<body class=bkg02>
+<div class=hdg30 style='margin-left:110'>Calendar Items</div>
+<form style='margin:0'>
+<span class=det30 style='font:8pt Arial;cursor:default;overflow:hidden;height:25;margin-left:102'>
+<input name=cal type=radio onclick='go(0)' checked>Summary&nbsp;
+<input name=cal type=radio onclick='go(1)'>Details
+</span>
+</form>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<html>
+<head>
+<link rel="stylesheet" href="styles.css" type="text/css">
+<script src="js/bts.js"></script>
+<script>
+var i=new Image()
+i.src="img/m1.gif"
+i.src="img/m0.gif"
+
+var tm,rm,sm,TimerID
+function init(){
+	tm=document.getElementById("tour")
+	rm=document.getElementById("rpts")
+	
+	setCookie("menuItem","mnu1")
+	m=document.getElementById("mnu1")
+	m.className="mnu61"
+	m.style.color=myStyles[".mnu61"].color
+}
+function u(e,s){
+	e = (!e) ? event.srcElement : e.target
+	if (e.childNodes.length!=1) return
+	e.style.textDecoration=(s)? "underline" : ""
+}
+function go(e,m){
+	e = (!e) ? event.srcElement : e.target
+	if (e.id=="overview")
+		top.details.location.href="tour-overview.htm"
+	else if (m==0)
+		top.details.location.href="tour.htm?"+e.id
+	else
+		top.details.location.href="sample-reports.htm?"+e.id
+}
+function ms(e,d,m){
+	if (sm!=null && sm.id==m) return
+	tm.style.display="none"
+	rm.style.display="none"
+	sm=null
+	menuSelect(e,d)
+	if(m!=null){
+		sm=document.getElementById(m)
+		sm.style.height=1
+		sm.style.display=""
+		TimerID=window.setInterval(reveal,1)
+	}
+}
+function reveal(){
+	sm.style.height=(h=parseInt(sm.style.height)+5)
+	if (h>((sm.id=="tour")?201:116)) window.clearInterval(TimerID)
+}
+</script>
+</head>
+<body onload='init()' class=grd5e style='margin-top:33' scroll=no>
+<table border=0 cellspacing=0 cellpadding=0>
+<col width=95>
+
+<tr><td id=mnu1 class=mnu61 onclick='ms(this,"signon.asp")' onMouseOver='menuHover(this,1)' onMouseOut='menuHover(this,0)'>
+Sign-On</td><td><img id=mnu1b src='img/m1.gif' /></td></tr>
+<tr style='height:4'><td></td></tr>
+
+<tr><td id=mnu2 class=mnu29 onclick='ms(this,"forgot-password.asp")' onmouseover='menuHover(this,1)' onmouseout='menuHover(this,0)'>
+Password?</td><td><img id=mnu2b src='img/m0.gif' /></td></tr>
+<tr style='height:12'><td></td></tr>
+
+<tr><td id=mnu3 class=mnu29 onclick='ms(this,"tour-overview.htm","tour")' onmouseover='menuHover(this,1)' onmouseout='menuHover(this,0)'>
+Take a Tour</td><td><img id=mnu3b src='img/m0.gif' /></td></tr>
+<tr style='height:4'><td>
+<div id=tour class=det40 style='margin:4 0 0 5;cursor:pointer;font-weight:bold;overflow:hidden;display:none'
+ onmouseover=u(arguments[0],1) onmouseout=u(arguments[0]) onclick=go(arguments[0],0)>
+<div id=overview>Overview</div>
+<div id=acctinfo>Account Info</div>
+<div id=list>Tracking List</div>
+<div id=listinfo>List Info</div>
+<div id=home>Home</div>
+<div id=rptsum>Summary Reports</div>
+<div id=rptdet>Detail Reports</div>
+<div id=rptcust>Custom Reports</div>
+<div id=quickadd>Quick Add</div>
+<div id=browse>Browse</div>
+<div id=search>Search</div>
+<div id=vcard>Vote Card</div>
+<div id=vcardcreate>Create Vote Card</div>
+<div id=campaign>Campaign</div>
+</div>
+</td></tr>
+
+<tr><td id=mnu4 class=mnu29 onclick='ms(this,"sample-reports.htm?daily","rpts")' onmouseover='menuHover(this,1)' onmouseout='menuHover(this,0)'>
+Sample&nbsp;Reports</td><td><img id=mnu4b src='img/m0.gif' /></td></tr>
+<tr style='height:4'><td>
+<div id=rpts class=det40 style='margin:4 0 0 5;cursor:pointer;font-weight:bold;overflow:hidden;display:none'
+ onmouseover=u(arguments[0],1) onmouseout=u(arguments[0]) onclick=go(arguments[0],1)>
+<div id=daily>Daily Report</div>
+<div id=daily-ex>Daily (Excel)</div>
+<div id=weekly>Weekly Report</div>
+<div id=weekly-ex>Weekly (Excel)</div>
+<div id=rollcall>Roll Call Analysis</div>
+<div id=dist-el>District Elections</div>
+<div id=contribs>Contributions</div>
+<div id=matrix>Contrib Analysis</div>
+</div>
+</td></tr>
+
+<tr><td id=mnu5 class=mnu29 onclick='ms(this,"pricing.htm")' onMouseOver='menuHover(this,1)' onMouseOut='menuHover(this,0)'>
+Pricing</td><td><img id=mnu5b src='img/m0.gif' /></td></tr>
+<tr style='height:12'><td></td></tr>
+
+<tr><td id=mnu6 class=mnu29 onclick='window.location.href="mailto:Brad Tower <bhtower@towerltd.org>?Subject=LegiTrak Web Site"'
+ onMouseOver='menuHover(this,1)' onMouseOut='menuHover(this,0)'>
+Contact Us</td><td><img id=mnu6b src='img/m0.gif' /></td></tr>
+
+</table>
+</body>
+</html>

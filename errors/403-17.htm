@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Security Error</title>
+<script>
+function init(){
+	if (window.top!=window) window.top.location.href=document.location.href
+}
+function getCookie(name) {
+	if ((c=/LegiTrak=([^;]+)/.exec(document.cookie))==null) return ""
+	re=new RegExp(name+"=([^&]+)")
+	value=re.exec(c[1])
+	return (value!=null)? unescape(value[1].replace(/\+/g,"%20")) : ""
+}
+</script>
+</head>
+<body onload='init()'>
+There is a problem with your CustomerID session cookie. For assistance, please contact <a href='mailto:bhtower@towerltd.org'>Brad Tower</a>.
+<br><br>
+Your CustomerID cookie is: "<script>document.write(getCookie("CustomerID"))</script>".
+</body>
+</html>

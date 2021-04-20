@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Query Help</title>
+</head>
+<body style='font-family:times new roman;font-size:14pt'>
+
+For a complete reference, you can view the
+<a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/tsqlref/ts_ca-co_2y2h.asp">
+technical specification</a> provided by Microsoft.<br><br>
+
+Searches are not case-sensitive and are composed of one or more of the following terms:
+<table border=1 cellspacing=1 cellpadding=3><col align=center>
+
+<tr><td><b>simple</b></td>
+<td>Either a single word, without spaces or punctuation; or a phrase enclosed in double quotes.
+For example, <i>taxes</i> or <i>"tax&nbsp;code"</i>. Note that the phrase <i>tax&nbsp;code</i> without the quotes
+will cause an error.</td></tr>
+
+<tr><td><b>prefix</b></td>
+<td>A word or phrase ending with an asterisk, enclosed in double-quotes. For example, <i>"tax*"</i> will
+find tax, taxes, taxation, etc. Note that <i>tax*</i> without the quotes will only find the word tax.</td></tr>
+
+<tr><td><b>generational</td>
+<td>You can use the expression <i>formsof(inflectional,<b>word</b>)</i> to find variants of a given
+word. This applies to nouns, verbs, and adjectives. For example, <i>formsof(inflectional,dry)</i> would find dry,
+dried, and drying.</td></tr>
+<tr><td><b>weighted</td>
+<td>The weighted keywords associated with any one of your tracking lists can be included in your search.</td></tr>
+</table>
+
+<br>Search terms can be combined using the following operators:
+<table border=1 cellspacing=1 cellpadding=3><col align=center>
+<tr><td><b>and</b></td>
+<td>Finds documents containing all of the specified words or phrases. For example, <i>peanut
+and butter</i> finds documents with both the word peanut and the word butter.</td></tr>
+<tr><td><b>or</b></td>
+<td>Finds documents containing at least one of the specified words or phrases. For example, <i>peanut
+or butter</i> finds documents containing either peanut or butter. The documents found could
+contain both items, but not necessarily.</td></tr>
+<tr><td><b>and&nbsp;not</td>
+<td>Excludes documents containing the specified word or phrase. For example, <i>peanut and not
+butter</i> finds documents with peanut but not containing butter. The operator <b>not</b>
+must be used with the operator <b>and</b>. SQL Server does not accept <i>peanut
+not butter</i>; instead, specify <i>peanut and not butter</i>.</td></tr>
+<tr><td><b>near</b></td>
+<td>Finds documents containing both specified words or phrases, and gives a higher relevance ranking
+to documents where the words are closer together. Note that the operator <b>near</b> is not supported
+in conjunction with the <b>formsof</b> search term; combining them will result in an error.</td></tr>
+<tr><td><b>(&nbsp;&nbsp;)</b></td>
+<td>Use parentheses to group search terms. For example, <i>"peanut butter" and (jelly or jam)</i>
+finds documents with the words 'peanut butter with jelly' or 'peanut butter with jam' or both.</td></tr>
+</table>
+</body>
+</html>
